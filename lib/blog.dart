@@ -10,7 +10,6 @@ class Blog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AssetBundle bundle = DefaultAssetBundle.of(context);
     List<IconData> icons = [
       Icons.home_outlined,
       Icons.article_outlined,
@@ -18,19 +17,16 @@ class Blog extends StatelessWidget {
     ];
 
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-            'images/xSmall.jpg',
-             bundle: bundle
-          ),
+          image: AssetImage('images/xSmall.jpg'),
           fit: BoxFit.cover,
-        )
+        ),
       ),
       child: NavBar(
         icons: icons,
         page: MyPage.blog,
-      )
+      ),
     );
   }
 }

@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 
 import 'home.dart';
 import 'blog.dart';
-import 'contact.dart';
 
 void main() => runApp(const MyApp());
 
@@ -21,12 +20,6 @@ final GoRouter _router = GoRouter(
           path: 'blog',
           builder: (BuildContext context, GoRouterState state) {
             return const Blog();
-          },
-        ),
-        GoRoute(
-          path: 'contact',
-          builder: (BuildContext context, GoRouterState state) {
-            return const Contact();
           },
         ),
       ],

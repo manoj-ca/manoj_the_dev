@@ -10,7 +10,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AssetBundle bundle = DefaultAssetBundle.of(context);
     List<IconData> icons = [
       Icons.home_outlined,
       Icons.article_outlined,
@@ -18,12 +17,14 @@ class Home extends StatelessWidget {
     ];
 
     return Container(
-      decoration: BoxDecoration(
+      foregroundDecoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-            'images/xSmall.jpg',
-             bundle: bundle
-          ),
+          image: AssetImage('images/ManojBlue.png'),
+        ),
+      ),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('images/xSmall.jpg'),
           fit: BoxFit.cover,
         )
       ),
