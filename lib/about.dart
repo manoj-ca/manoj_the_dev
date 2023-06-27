@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'nav_bar.dart';
 import 'my_page.dart';
 
-class Blog extends StatelessWidget {
-  const Blog({super.key});
+class About extends StatelessWidget {
+  const About({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class Blog extends StatelessWidget {
         ),
       ),
       child: NavBar(
-        page: MyPage.blog,
+        page: MyPage.about,
       ),
     );
   }

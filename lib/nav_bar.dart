@@ -9,12 +9,13 @@ import 'my_page.dart';
 class NavBar extends StatelessWidget {
   NavBar({
     super.key,
-    required this.icons,
     required this.page,
   }) {
     switch (page) {
       case MyPage.home:
         icons[MyPage.home.idx] = Icons.home;
+      case MyPage.about:
+        icons[MyPage.about.idx] = Icons.person;
       case MyPage.blog:
         icons[MyPage.blog.idx] = Icons.article;
       case MyPage.contact:
@@ -22,8 +23,13 @@ class NavBar extends StatelessWidget {
     }
   }
 
-  final List<IconData> icons;
   final MyPage page;
+  final List<IconData> icons = [
+    Icons.home_outlined,
+    Icons.person_outlined,
+    Icons.article_outlined,
+    Icons.email_outlined
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +49,12 @@ class NavBar extends StatelessWidget {
             leadingWidth: 140,
             actions: <Widget>[
               ElevatedButton.icon(
+                onPressed: () => context.go('/about'),
+                icon: Icon(icons[MyPage.about.idx]),
+                label: const Text('About'),
+              ),
+              const SizedBox(width: 10),
+              ElevatedButton.icon(
                 onPressed: () => context.go('/blog'),
                 icon: Icon(icons[MyPage.blog.idx]),
                 label: const Text('Blog'),
@@ -58,23 +70,23 @@ class NavBar extends StatelessWidget {
       ]),
     ]);
   }
-}
 
-void _launchMailClient() async {
-  final Uri emailLaunchUri = Uri(
-    scheme: 'mailto',
-    path: 'manoj_ca@yahoo.com',
-    query: encodeQueryParameters(<String, String>{
-      'subject': 'Manoj the Dev website',
-    }),
-  );
+  void _launchMailClient() async {
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: 'manoj_ca@yahoo.com',
+      query: encodeQueryParameters(<String, String>{
+        'subject': 'Manoj the Dev website',
+      }),
+    );
 
-  launchUrl(emailLaunchUri);
-}
+    launchUrl(emailLaunchUri);
+  }
 
-String? encodeQueryParameters(Map<String, String> params) {
-  return params.entries
-      .map((MapEntry<String, String> e) =>
-          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-      .join('&');
+  String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((MapEntry<String, String> e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
+  }
 }

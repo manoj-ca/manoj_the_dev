@@ -1,5 +1,7 @@
 // Copyright 2023 Manoj Prasad. All rights reserved.
 
+// Copyright 2023 Manoj Prasad. All rights reserved.
+
 import 'package:flutter/material.dart';
 
 import 'nav_bar.dart';
@@ -10,12 +12,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<IconData> icons = [
-      Icons.home_outlined,
-      Icons.article_outlined,
-      Icons.email_outlined
-    ];
-
     return Container(
       foregroundDecoration: const BoxDecoration(
         image: DecorationImage(
@@ -29,7 +25,6 @@ class Home extends StatelessWidget {
         )
       ),
       child: NavBar(
-        icons: icons,
         page: MyPage.home,
       )
     );
