@@ -2,24 +2,19 @@
 
 import 'package:flutter/material.dart';
 
-import 'nav_bar.dart';
-import 'my_page.dart';
+import 'my_bar.dart';
 
-class Blog extends StatelessWidget {
-  const Blog({super.key});
+class Blog extends MyBar {
+  Blog({super.key, required super.page});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('images/xSmall.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: NavBar(
-        page: MyPage.blog,
-      ),
+    return Scaffold(
+      appBar: appBar(context),
+      body: const Column(
+        children: [
+        ],
+      )
     );
   }
 }
