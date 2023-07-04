@@ -11,7 +11,7 @@ class Blog extends MyBar {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(context),
-      body: const Column(
+      body: ListView(
         children: [
         ],
       )

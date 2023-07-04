@@ -6,15 +6,19 @@ import 'package:go_router/go_router.dart';
 import 'home.dart';
 import 'blog.dart';
 import 'my_bar.dart';
+import 'json.dart';
 
 void main() => runApp(const MyApp());
+
+Document get _homeDoc => Document(documentJson: homeRawJson);
 
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return Home(page: MyPage.home);
+        //return Home(page: MyPage.home);
+        return Home(page: MyPage.home, homeDoc: _homeDoc);
       },
       routes: <RouteBase>[
         GoRoute(

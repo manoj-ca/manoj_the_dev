@@ -35,10 +35,10 @@ abstract class MyBar extends StatelessWidget {
     Icons.email_outlined
   ];
 
-  void launchMailClient() async {
+  void _launchMailClient() async {
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
-      path: 'manoj_ca@yahoo.com',
+      path: 'manoj.the.yogi@gmail.com',
       query: encodeQueryParameters(<String, String>{
         'subject': 'Manoj the Dev website',
       }),
@@ -74,7 +74,7 @@ abstract class MyBar extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         ElevatedButton.icon(
-          onPressed: () => launchMailClient(),
+          onPressed: () => _launchMailClient(),
           icon: Icon(icons[MyPage.contact.idx]),
           label: const Text('Contact'),
         ),
