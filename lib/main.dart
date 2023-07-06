@@ -1,16 +1,22 @@
 // Copyright 2023 Manoj Prasad. All rights reserved.
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
 import 'home.dart';
 import 'blog.dart';
-import 'my_bar.dart';
-import 'json.dart';
+import 'bar.dart';
+import 'state.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
 
-Document get _homeDoc => Document(documentJson: homeRawJson);
+  runApp(ChangeNotifierProvider(
+    create: (context) => MyState(),
+    builder: ((context, child) => const MyApp()),
+  ));
+}
 
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
@@ -18,7 +24,7 @@ final GoRouter _router = GoRouter(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         //return Home(page: MyPage.home);
-        return Home(page: MyPage.home, homeDoc: _homeDoc);
+        return Home(page: MyPage.home);
       },
       routes: <RouteBase>[
         GoRoute(

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'my_bar.dart';
+import 'bar.dart';
 
 class Blog extends MyBar {
   Blog({super.key, required super.page});

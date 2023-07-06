@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "59245358030",
+    "project_id": "manoj-the-dev",
+    "storage_bucket": "manoj-the-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59245358030:android:a6a54f64f04089a50e199f",
+        "android_client_info": {
+          "package_name": "com.example.manoj_the_dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59245358030-krhurcqijseg3ll47rh2fdp5i9nvshkj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCSdpwYvNe_veFu-ALjlqyH8nHTf1SXMU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59245358030-krhurcqijseg3ll47rh2fdp5i9nvshkj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

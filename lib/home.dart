@@ -2,62 +2,12 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'my_bar.dart';
-import 'json.dart';
-
-const homeRawJson = '''
-{
-  "blocks": [
-    {
-      "type": "title",
-      "text": "Hi, I'm Manoj.                                      ",
-      "return": 2
-    },
-    {
-      "type": "body",
-      "text": "I'm a developer for hire. If interested, checkout my profile at ",
-      "return": 0
-    },
-    {
-      "type": "link",
-      "text": "Indeed",
-      "return": 0
-    },
-    {
-      "type": "body",
-      "text": " or use the Contact button above to send me an email.",
-      "return": 2
-    },
-    {
-      "type": "body",
-      "text": "I created this website using Flutter to both learn and demonstrate my skills. You can checkout the source code at ",
-      "return": 0
-    },
-    {
-      "type": "link",
-      "text": "GitHub",
-      "return": 0
-    },
-    {
-      "type": "body",
-      "text": ".",
-      "return": 2
-    },
-    {
-      "type": "body",
-      "text": "I also have a blog here where I discuss all things related to Flutter. Use the Blog button above to access it.",
-      "return": 2
-    },
-    {
-      "type": "title",
-      "text": "Enjoy!                                                    ",
-      "return": 2
-    }
-  ]
-}
-''';
+import 'bar.dart';
+import 'state.dart';
+import 'block.dart';
 
 enum MyUrl {
   indeed(url: 'https://ca.indeed.com/'),
@@ -70,14 +20,11 @@ enum MyUrl {
 }
 
 class Home extends MyBar {
-  Home({super.key, required super.page, required this.homeDoc});
-
-  final Document homeDoc;
+  Home({super.key, required super.page});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final blocks = homeDoc.getBlocks();
 
     return Scaffold(
         backgroundColor: theme.colorScheme.primary,
@@ -86,19 +33,21 @@ class Home extends MyBar {
           children: [
             Image.asset('images/ManojFlutter.png'),
             const SizedBox(height: 50),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(children: [
-                SizedBox(
-                  width: 700,
-                  child: RichText(
-                    text: TextSpan(children: [
-                      for (final block in blocks)
-                        BlockSpan(block: block).textSpn(context),
-                    ]),
+            Consumer<MyState>(
+              builder: (context, myState, _) => Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(children: [
+                  SizedBox(
+                    width: 700,
+                    child: RichText(
+                      text: TextSpan(children: [
+                        for (final block in myState.blocks)
+                          BlockSpan(block: block).textSpn(context),
+                      ]),
+                    ),
                   ),
-                ),
-              ]),
+                ]),
+              ),
             ),
           ],
         ));
@@ -130,33 +79,42 @@ class BlockSpan {
       decorationColor: theme.colorScheme.inversePrimary,
     );
 
-    switch (block) {
-      case TitleBlock(:final text, :final ret):
+    switch (block.type) {
+      case 'title':
         return TextSpan(
-          text: _textRet(text, ret),
+          text: _textRet(block),
           style: styleTitle,
         );
-      case BodyBlock(:final text, :final ret):
+      case 'body':
         return TextSpan(
-          text: _textRet(text, ret),
+          text: _textRet(block),
           style: styleBody,
         );
-      case LinkBlock(:final text, :final ret):
+      case 'link':
         return TextSpan(
-          text: _textRet(text, ret),
+          text: _textRet(block),
           style: styleLink,
           recognizer: TapGestureRecognizer()
-            ..onTap = () => _launchUrl(MyUrl.indeed.uri)
+            ..onTap = () => _launchUrl(_destUrl(block.text).uri),
         );
     }
+    throw const FormatException('Unexpected Block format');
   }
 
-  String _textRet(String text, int ret) {
-    return switch (ret) {
-      0 => text,
-      1 => '$text\n',
-      2 => '$text\n\n',
-      _ => throw const FormatException('Unexpected JSON format'),
+  String _textRet(Block block) {
+    return switch (block.ret) {
+      0 => '${block.text}',
+      1 => '${block.text}\n',
+      2 => '${block.text}\n\n',
+      _ => throw const FormatException('Unexpected Block format'),
+    };
+  }
+
+  MyUrl _destUrl(text) {
+    return switch (text) {
+      "Indeed" => MyUrl.indeed,
+      "GitHub" => MyUrl.github,
+      _ => throw const FormatException('Unexpected Block format'),
     };
   }
 }
