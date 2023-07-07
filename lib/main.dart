@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import 'home.dart';
 import 'blog.dart';
+import 'learn.dart';
 import 'bar.dart';
 import 'state.dart';
 
@@ -23,14 +24,19 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        //return Home(page: MyPage.home);
-        return Home(page: MyPage.home);
+        return MyHome(page: MyPage.home);
       },
       routes: <RouteBase>[
         GoRoute(
           path: 'blog',
           builder: (BuildContext context, GoRouterState state) {
-            return Blog(page: MyPage.blog);
+            return MyBlog(page: MyPage.blog);
+          },
+        ),
+        GoRoute(
+          path: 'learn',
+          builder: (BuildContext context, GoRouterState state) {
+            return MyLearn(page: MyPage.learn);
           },
         ),
       ],

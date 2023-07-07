@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'bar.dart';
 import 'display.dart';
 
-class MyHome extends MyBar {
-  MyHome({super.key, required super.page});
+class MyLearn extends MyBar {
+  MyLearn({super.key, required super.page});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +16,8 @@ class MyHome extends MyBar {
         backgroundColor: theme.colorScheme.primary,
         appBar: appBar(context),
         body: ListView(
-          children: [
-            Image.asset('images/ManojFlutter.png'),
-            const MyDisplay(page: MyPage.home),
+          children: const [
+            MyDisplay(page: MyPage.learn),
           ],
         ));
   }

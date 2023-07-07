@@ -7,7 +7,8 @@ import 'package:url_launcher/url_launcher.dart';
 enum MyPage {
   home(idx: 0),
   blog(idx: 1),
-  contact(idx: 2);
+  learn(idx: 2),
+  contact(idx: 3);
 
   const MyPage({required this.idx});
   final int idx;
@@ -23,6 +24,8 @@ abstract class MyBar extends StatelessWidget {
         icons[MyPage.home.idx] = Icons.home;
       case MyPage.blog:
         icons[MyPage.blog.idx] = Icons.article;
+      case MyPage.learn:
+        icons[MyPage.learn.idx] = Icons.book;
       case MyPage.contact:
         icons[MyPage.contact.idx] = Icons.email;
     }
@@ -32,6 +35,7 @@ abstract class MyBar extends StatelessWidget {
   final List<IconData> icons = [
     Icons.home_outlined,
     Icons.article_outlined,
+    Icons.book_outlined,
     Icons.email_outlined
   ];
 
@@ -71,6 +75,12 @@ abstract class MyBar extends StatelessWidget {
           onPressed: () => context.go('/blog'),
           icon: Icon(icons[MyPage.blog.idx]),
           label: const Text('Blog'),
+        ),
+        const SizedBox(width: 10),
+        ElevatedButton.icon(
+          onPressed: () => context.go('/learn'),
+          icon: Icon(icons[MyPage.learn.idx]),
+          label: const Text('Learn'),
         ),
         const SizedBox(width: 10),
         ElevatedButton.icon(

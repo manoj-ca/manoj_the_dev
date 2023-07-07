@@ -3,18 +3,22 @@
 import 'package:flutter/material.dart';
 
 import 'bar.dart';
+import 'display.dart';
 
-class Blog extends MyBar {
-  Blog({super.key, required super.page});
+class MyBlog extends MyBar {
+  MyBlog({super.key, required super.page});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
-      appBar: appBar(context),
-      body: ListView(
-        children: [
-        ],
-      )
-    );
+        backgroundColor: theme.colorScheme.primary,
+        appBar: appBar(context),
+        body: ListView(
+          children: const [
+            MyDisplay(page: MyPage.blog),
+          ],
+        ));
   }
 }
