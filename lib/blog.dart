@@ -17,7 +17,7 @@ class MyBlog extends MyBar {
         appBar: appBar(context),
         body: ListView(
           children: const [
-            MyDisplay(page: MyPage.blog),
+            MyDisplay(page: MyPage.blog, sec: 0),
           ],
         ));
   }

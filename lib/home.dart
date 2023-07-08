@@ -18,7 +18,7 @@ class MyHome extends MyBar {
         body: ListView(
           children: [
             Image.asset('images/ManojFlutter.png'),
-            const MyDisplay(page: MyPage.home),
+            const MyDisplay(page: MyPage.home, sec: 0),
           ],
         ));
   }

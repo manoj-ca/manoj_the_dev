@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 
 import 'bar.dart';
+import 'code.dart';
 import 'display.dart';
+import 'url.dart';
 
 class MyLearn extends MyBar {
   MyLearn({super.key, required super.page});
@@ -15,10 +17,25 @@ class MyLearn extends MyBar {
     return Scaffold(
         backgroundColor: theme.colorScheme.primary,
         appBar: appBar(context),
-        body: ListView(
-          children: const [
-            MyDisplay(page: MyPage.learn),
-          ],
-        ));
+        body: ListView(children: [
+          const MyDisplay(
+            page: MyPage.learn,
+            sec: 1,
+          ),
+          MyCode(
+            theme: theme,
+            hello: MyHello.dart,
+            url: MyUrl.helloDart,
+          ),
+          const MyDisplay(
+            page: MyPage.learn,
+            sec: 2,
+          ),
+          MyCode(
+            theme: theme,
+            hello: MyHello.flutter,
+            url: MyUrl.helloFlutter,
+          ),
+        ]));
   }
 }

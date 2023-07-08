@@ -4,28 +4,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'bar.dart';
 import 'state.dart';
+import 'url.dart';
 
 class MyDisplay extends StatelessWidget {
-  const MyDisplay({super.key, required this.page});
+  const MyDisplay({
+    super.key,
+    required this.page,
+    required this.sec,
+  });
 
   final MyPage page;
+  final int sec;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<MyState>(
       builder: (context, myState, _) => Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 50.0, horizontal: 15.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(children: [
           SizedBox(
             width: 700,
             child: RichText(
               text: TextSpan(children: [
-                for (final block in myState.blocks(page))
+                for (final block in myState.blocks(page, sec))
                   BlockSpan(block: block).textSpn(context),
               ]),
             ),
@@ -36,29 +40,10 @@ class MyDisplay extends StatelessWidget {
   }
 }
 
-enum MyUrl {
-  indeed(url: 'https://ca.indeed.com/'),
-  flutter(url: 'https://flutter.dev/'),
-  github(url: 'https://github.com/manoj-ca/manoj_the_dev'),
-  ionic(url: 'https://ionic.io/resources/articles/'
-               'ionic-vs-flutter-comparison-guide');
-
-  const MyUrl({required this.url});
-  final String url;
-
-  Uri get uri => Uri.parse(url);
-}
-
 class BlockSpan {
   const BlockSpan({required this.block});
 
   final MyBlock block;
-
-  Future<void> _launchUrl(Uri uri) async {
-    if (!await launchUrl(uri)) {
-      throw Exception('Could not launch $uri');
-    }
-  }
 
   TextSpan textSpn(BuildContext context) {
     final theme = Theme.of(context);
@@ -104,7 +89,10 @@ class BlockSpan {
           text: _textRet(block),
           style: styleLink,
           recognizer: TapGestureRecognizer()
-            ..onTap = () => _launchUrl(_destUrl(block).uri),
+            ..onTap = () {
+              MyUrl url = _destUrl(block);
+              url.myLaunch(url.uri);
+            },
         ),
       _ => throw const FormatException('Unexpected Block format'),
     };
@@ -115,15 +103,19 @@ class BlockSpan {
       0 => '${block.text}',
       1 => '${block.text}\n',
       2 => '${block.text}\n\n',
+      3 => '${block.text}\n\n\n',
       _ => throw const FormatException('Unexpected Block format'),
     };
   }
 
   MyUrl _destUrl(MyBlock block) {
     return switch (block.text) {
-      "Indeed" => MyUrl.indeed,
+      "Dart" => MyUrl.dart,
+      "DartPad" => MyUrl.dartpad,
       "Flutter" => MyUrl.flutter,
       "GitHub" => MyUrl.github,
+      "Hello, World!" => MyUrl.hello,
+      "Indeed" => MyUrl.indeed,
       "Ionic" => MyUrl.ionic,
       _ => throw const FormatException('Unexpected Block format'),
     };
