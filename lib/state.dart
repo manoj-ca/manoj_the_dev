@@ -14,16 +14,10 @@ class MyState extends ChangeNotifier {
   }
 
   List<MyBlock> _homeBlocks = [];
-  List<MyBlock> get homeBlocks => _homeBlocks;
-
   List<MyBlock> _whyBlocks = [];
-  List<MyBlock> get whyBlocks => _whyBlocks;
-
   List<MyBlock> _hw1Blocks = [];
-  List<MyBlock> get hw1Blocks => _hw1Blocks;
-
   List<MyBlock> _hw2Blocks = [];
-  List<MyBlock> get hw2Blocks => _hw2Blocks;
+  List<MyBlock> _hw3Blocks = [];
 
   List<MyBlock> blocks(MyPage page, int sec) {
     switch (page) {
@@ -35,6 +29,7 @@ class MyState extends ChangeNotifier {
         return switch (sec) {
           1 => _hw1Blocks,
           2 => _hw2Blocks,
+          3 => _hw3Blocks,
           _ => throw Exception('Unexpected Page'),
         };
       case _:
@@ -90,6 +85,18 @@ class MyState extends ChangeNotifier {
       _hw2Blocks = [];
       for (final document in snapshot.docs) {
         _hw2Blocks.add(MyBlock.fromFirestore(document));
+      }
+      notifyListeners();
+    });
+
+    FirebaseFirestore.instance
+        .collection('hello_world_3')
+        .orderBy('idx')
+        .snapshots()
+        .listen((snapshot) {
+      _hw3Blocks = [];
+      for (final document in snapshot.docs) {
+        _hw3Blocks.add(MyBlock.fromFirestore(document));
       }
       notifyListeners();
     });

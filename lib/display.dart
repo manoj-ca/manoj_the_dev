@@ -104,19 +104,25 @@ class BlockSpan {
       1 => '${block.text}\n',
       2 => '${block.text}\n\n',
       3 => '${block.text}\n\n\n',
+      5 => '${block.text}\n\n\n\n\n',
+      10 => '${block.text}\n\n\n\n\n\n\n\n\n\n',
       _ => throw const FormatException('Unexpected Block format'),
     };
   }
 
   MyUrl _destUrl(MyBlock block) {
     return switch (block.text) {
-      "Dart" => MyUrl.dart,
-      "DartPad" => MyUrl.dartpad,
-      "Flutter" => MyUrl.flutter,
-      "GitHub" => MyUrl.github,
-      "Hello, World!" => MyUrl.hello,
-      "Indeed" => MyUrl.indeed,
-      "Ionic" => MyUrl.ionic,
+      'Center' => MyUrl.center,
+      'Dart' => MyUrl.dart,
+      'DartPad' => MyUrl.dartpad,
+      'Flutter' => MyUrl.flutter,
+      'GitHub' => MyUrl.github,
+      'Hello, World!' => MyUrl.hello,
+      'Indeed' => MyUrl.indeed,
+      'Ionic' => MyUrl.ionic,
+      'Named Parameters' => MyUrl.named,
+      'Text' => MyUrl.text,
+      'TextDirection' => MyUrl.textdir,
       _ => throw const FormatException('Unexpected Block format'),
     };
   }

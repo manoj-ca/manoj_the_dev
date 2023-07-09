@@ -5,12 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'url.dart';
 
-const String helloDartCode = '''
+const String _helloDartCode = '''
 void main() {
   print('Hello, World!');
 }''';
 
-const String helloFlutterCode = '''
+const String _helloFlutterCode = '''
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,9 +24,28 @@ void main() {
   );
 }''';
 
+const String _helloSolutionCode = '''
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    const Center(
+      child: Text(
+        'Hello, World!',
+        textDirection: TextDirection.ltr,
+        style: TextStyle(
+          fontSize: 30,
+          color: Colors.red,
+        ),
+      ),
+    ),
+  );
+}''';
+
 enum MyHello {
-  dart(code: helloDartCode),
-  flutter(code: helloFlutterCode);
+  dart(code: _helloDartCode),
+  flutter(code: _helloFlutterCode),
+  solution(code: _helloSolutionCode);
 
   const MyHello({required this.code});
 

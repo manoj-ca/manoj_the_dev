@@ -7,15 +7,15 @@
 import 'package:flutter/material.dart';
 import 'package:dart_pad_widget/dart_pad_widget.dart';
 
-const String helloDart = 'Hello Dart';
-const String helloDartCode = '''
+const String _helloDart = 'Hello Dart';
+const String _helloDartCode = '''
 void main() {
   print('Hello World!');
 }
 ''';
 
-const String helloFlutter = 'Hello Flutter';
-const String helloFlutterCode = '''
+const String _helloFlutter = 'Hello Flutter';
+const String _helloFlutterCode = '''
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,8 +32,8 @@ void main() {
 ''';
 
 enum MyCode {
-  dart(key: helloDart, code: helloDartCode),
-  flutter(key: helloFlutter, code: helloFlutterCode);
+  dart(key: _helloDart, code: _helloDartCode),
+  flutter(key: _helloFlutter, code: _helloFlutterCode);
 
   const MyCode({required this.key, required this.code});
 

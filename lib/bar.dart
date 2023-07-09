@@ -21,18 +21,18 @@ abstract class MyBar extends StatelessWidget {
   }) {
     switch (page) {
       case MyPage.home:
-        icons[MyPage.home.idx] = Icons.home;
+        _icons[MyPage.home.idx] = Icons.home;
       case MyPage.blog:
-        icons[MyPage.blog.idx] = Icons.article;
+        _icons[MyPage.blog.idx] = Icons.article;
       case MyPage.learn:
-        icons[MyPage.learn.idx] = Icons.book;
+        _icons[MyPage.learn.idx] = Icons.book;
       case MyPage.contact:
-        icons[MyPage.contact.idx] = Icons.email;
+        _icons[MyPage.contact.idx] = Icons.email;
     }
   }
 
   final MyPage page;
-  final List<IconData> icons = [
+  final List<IconData> _icons = [
     Icons.home_outlined,
     Icons.article_outlined,
     Icons.book_outlined,
@@ -65,7 +65,7 @@ abstract class MyBar extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: ElevatedButton.icon(
           onPressed: () => context.go('/'),
-          icon: Icon(icons[MyPage.home.idx]),
+          icon: Icon(_icons[MyPage.home.idx]),
           label: const Text('Home'),
         ),
       ),
@@ -73,19 +73,19 @@ abstract class MyBar extends StatelessWidget {
       actions: <Widget>[
         ElevatedButton.icon(
           onPressed: () => context.go('/blog'),
-          icon: Icon(icons[MyPage.blog.idx]),
+          icon: Icon(_icons[MyPage.blog.idx]),
           label: const Text('Blog'),
         ),
         const SizedBox(width: 10),
         ElevatedButton.icon(
           onPressed: () => context.go('/learn'),
-          icon: Icon(icons[MyPage.learn.idx]),
+          icon: Icon(_icons[MyPage.learn.idx]),
           label: const Text('Learn'),
         ),
         const SizedBox(width: 10),
         ElevatedButton.icon(
           onPressed: () => _launchMailClient(),
-          icon: Icon(icons[MyPage.contact.idx]),
+          icon: Icon(_icons[MyPage.contact.idx]),
           label: const Text('Contact'),
         ),
         const SizedBox(width: 10),

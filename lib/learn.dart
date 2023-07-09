@@ -36,6 +36,15 @@ class MyLearn extends MyBar {
             hello: MyHello.flutter,
             url: MyUrl.helloFlutter,
           ),
+          const MyDisplay(
+            page: MyPage.learn,
+            sec: 3,
+          ),
+          MyCode(
+            theme: theme,
+            hello: MyHello.solution,
+            url: MyUrl.helloSolution,
+          ),
         ]));
   }
 }
