@@ -22,20 +22,25 @@ abstract class MyBar extends StatelessWidget {
     switch (page) {
       case MyPage.home:
         _icons[MyPage.home.idx] = Icons.home;
+        selectedIdx = MyPage.home.idx;
       case MyPage.blog:
         _icons[MyPage.blog.idx] = Icons.article;
+        selectedIdx = MyPage.blog.idx;
       case MyPage.learn:
-        _icons[MyPage.learn.idx] = Icons.book;
+        _icons[MyPage.learn.idx] = Icons.school;
+        selectedIdx = MyPage.learn.idx;
       case MyPage.contact:
         _icons[MyPage.contact.idx] = Icons.email;
+        selectedIdx = MyPage.contact.idx;
     }
   }
 
+  int selectedIdx = 0;
   final MyPage page;
   final List<IconData> _icons = [
     Icons.home_outlined,
     Icons.article_outlined,
-    Icons.book_outlined,
+    Icons.school_outlined,
     Icons.email_outlined
   ];
 
@@ -60,36 +65,81 @@ abstract class MyBar extends StatelessWidget {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      leading: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: ElevatedButton.icon(
-          onPressed: () => context.go('/'),
-          icon: Icon(_icons[MyPage.home.idx]),
-          label: const Text('Home'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        leading: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: ElevatedButton.icon(
+            onPressed: () => context.go('/'),
+            icon: Icon(_icons[MyPage.home.idx]),
+            label: const Text('Home'),
+          ),
         ),
-      ),
-      leadingWidth: 140,
-      actions: <Widget>[
-        ElevatedButton.icon(
-          onPressed: () => context.go('/blog'),
-          icon: Icon(_icons[MyPage.blog.idx]),
-          label: const Text('Blog'),
-        ),
-        const SizedBox(width: 10),
-        ElevatedButton.icon(
-          onPressed: () => context.go('/learn'),
-          icon: Icon(_icons[MyPage.learn.idx]),
-          label: const Text('Learn'),
-        ),
-        const SizedBox(width: 10),
-        ElevatedButton.icon(
-          onPressed: () => _launchMailClient(),
-          icon: Icon(_icons[MyPage.contact.idx]),
-          label: const Text('Contact'),
-        ),
-        const SizedBox(width: 10),
-      ]
-    );
+        leadingWidth: 140,
+        actions: <Widget>[
+          ElevatedButton.icon(
+            onPressed: () => context.go('/blog'),
+            icon: Icon(_icons[MyPage.blog.idx]),
+            label: const Text('Blog'),
+          ),
+          const SizedBox(width: 10),
+          ElevatedButton.icon(
+            onPressed: () => context.go('/learn'),
+            icon: Icon(_icons[MyPage.learn.idx]),
+            label: const Text('Learn'),
+          ),
+          const SizedBox(width: 10),
+          ElevatedButton.icon(
+            onPressed: () => _launchMailClient(),
+            icon: Icon(_icons[MyPage.contact.idx]),
+            label: const Text('Contact'),
+          ),
+          const SizedBox(width: 10),
+        ]);
+  }
+
+  BottomNavigationBar bottomBar(BuildContext context) {
+    Color bg = Theme.of(context).colorScheme.inversePrimary;
+
+    return BottomNavigationBar(
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+        unselectedItemColor: Theme.of(context).colorScheme.primary,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(_icons[MyPage.home.idx]),
+            label: 'Home',
+            backgroundColor: bg,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(_icons[MyPage.blog.idx]),
+            label: 'Blog',
+            backgroundColor: bg,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(_icons[MyPage.learn.idx]),
+            label: 'Learn',
+            backgroundColor: bg,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(_icons[MyPage.contact.idx]),
+            label: 'Contact',
+            backgroundColor: bg,
+          ),
+        ],
+        currentIndex: selectedIdx,
+        onTap: (selectedIdx) {
+          if (selectedIdx == MyPage.home.idx) {
+            context.go('/');
+          } else if (selectedIdx == MyPage.blog.idx) {
+            context.go('/blog');
+          } else if (selectedIdx == MyPage.learn.idx) {
+            context.go('/learn');
+          } else if (selectedIdx == MyPage.contact.idx) {
+            _launchMailClient();
+          } else {
+            throw Exception('Unexpected Page idx');
+          }
+        });
   }
 }

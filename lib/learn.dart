@@ -13,11 +13,13 @@ class MyLearn extends MyBar {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    bool isMobile = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-        backgroundColor: theme.colorScheme.primary,
-        appBar: appBar(context),
-        body: ListView(children: [
+      backgroundColor: theme.colorScheme.primary,
+      appBar: isMobile ? null : appBar(context),
+      body: ListView(
+        children: [
           const MyDisplay(
             page: MyPage.learn,
             sec: 1,
@@ -45,6 +47,9 @@ class MyLearn extends MyBar {
             hello: MyHello.solution,
             url: MyUrl.helloSolution,
           ),
-        ]));
+        ]
+      ),
+      bottomNavigationBar: isMobile ? bottomBar(context) : null,
+    );
   }
 }
