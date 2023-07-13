@@ -22,20 +22,15 @@ abstract class MyBar extends StatelessWidget {
     switch (page) {
       case MyPage.home:
         _icons[MyPage.home.idx] = Icons.home;
-        selectedIdx = MyPage.home.idx;
       case MyPage.blog:
         _icons[MyPage.blog.idx] = Icons.article;
-        selectedIdx = MyPage.blog.idx;
       case MyPage.learn:
         _icons[MyPage.learn.idx] = Icons.school;
-        selectedIdx = MyPage.learn.idx;
       case MyPage.contact:
         _icons[MyPage.contact.idx] = Icons.email;
-        selectedIdx = MyPage.contact.idx;
     }
   }
 
-  int selectedIdx = 0;
   final MyPage page;
   final List<IconData> _icons = [
     Icons.home_outlined,
@@ -98,7 +93,8 @@ abstract class MyBar extends StatelessWidget {
   }
 
   BottomNavigationBar bottomBar(BuildContext context) {
-    Color bg = Theme.of(context).colorScheme.inversePrimary;
+    final bg = Theme.of(context).colorScheme.inversePrimary;
+    final idx = page.idx;
 
     return BottomNavigationBar(
         showSelectedLabels: true,
@@ -127,15 +123,15 @@ abstract class MyBar extends StatelessWidget {
             backgroundColor: bg,
           ),
         ],
-        currentIndex: selectedIdx,
-        onTap: (selectedIdx) {
-          if (selectedIdx == MyPage.home.idx) {
+        currentIndex: idx,
+        onTap: (idx) {
+          if (idx == MyPage.home.idx) {
             context.go('/');
-          } else if (selectedIdx == MyPage.blog.idx) {
+          } else if (idx == MyPage.blog.idx) {
             context.go('/blog');
-          } else if (selectedIdx == MyPage.learn.idx) {
+          } else if (idx == MyPage.learn.idx) {
             context.go('/learn');
-          } else if (selectedIdx == MyPage.contact.idx) {
+          } else if (idx == MyPage.contact.idx) {
             _launchMailClient();
           } else {
             throw Exception('Unexpected Page idx');

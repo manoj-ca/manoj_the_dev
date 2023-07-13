@@ -11,7 +11,7 @@ class MyBlog extends MyBar {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    bool isMobile = MediaQuery.of(context).size.width < 600;
+    final isMobile = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
       backgroundColor: theme.colorScheme.primary,
