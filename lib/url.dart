@@ -25,6 +25,7 @@ enum MyUrl {
           'ionic-vs-flutter-comparison-guide'),
   named(
     url: 'https://dart.dev/language/functions#named-parameters'),
+  privacy(url: 'https://manoj-privacy-policy.web.app/'),
   text(
     url: 'https://api.flutter.dev/flutter/widgets/Text-class.html'),
   textdir(
