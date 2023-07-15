@@ -8,9 +8,9 @@ import 'display.dart';
 import 'url.dart';
 
 const String mobileDartPad =
-    'Note: on small screens, DartPad is not available. '
-    'Access https://manoj-the-dev.web.app/ from a desktop '
-    'to use DartPad.';
+    'Note: on small screens, DartPad is not available. Try '
+    'rotating your device or access https://manoj-the-dev.web.app/'
+    ' from a desktop to use DartPad.';
 
 class MyLearn extends MyBar {
   MyLearn({super.key, required super.page});
@@ -18,7 +18,7 @@ class MyLearn extends MyBar {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isMobile = MediaQuery.of(context).size.width < 600;
+    final isMobile = MediaQuery.of(context).size.width < 605;
     final styleSmall = theme.textTheme.headlineSmall!.copyWith(
       color: theme.colorScheme.onPrimary,
     );

@@ -12,7 +12,7 @@ class MyHome extends MyBar {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isMobile = MediaQuery.of(context).size.width < 600;
+    final isMobile = MediaQuery.of(context).size.width < 605;
     final styleSmall = theme.textTheme.headlineSmall!.copyWith(
       color: theme.colorScheme.inversePrimary,
       decoration: TextDecoration.underline,
